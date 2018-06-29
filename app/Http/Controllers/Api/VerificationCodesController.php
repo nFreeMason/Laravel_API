@@ -27,7 +27,7 @@ class VerificationCodesController extends Controller
                     ]
                 ]);
             }else{
-                $code = 1234;
+                $code = '1234';
             }
         }catch (ClientException $exception) {
             $response = $exception->getResponse();
