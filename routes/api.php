@@ -15,6 +15,14 @@ use Illuminate\Http\Request;
 
 $api = app(\Dingo\Api\Routing\Router::class);
 
+$api->version('v1',[
+    'namespace' => 'App\Http\Controllers\Api'
+],function($api){
+    // 短信验证码
+    $api->post('verificationCodes','VerificationCodesController@store')
+        ->name('api.verificationCodes.store');
+});
+
 $api->version('v1',function($api){
     $api->get('version',function(){
         return response('test this is version v1');

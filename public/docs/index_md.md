@@ -65,3 +65,6 @@
 >安装：composer require "overtrue/easy-sms"
 >github：[https://github.com/overtrue/easy-sms](https://github.com/overtrue/easy-sms)
 
+5、修改数据表迁移需要doctrine/dbal组件
+
+>安装：composer require doctrine/dbal
