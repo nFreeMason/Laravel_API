@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 $api = app(\Dingo\Api\Routing\Router::class);
 
+
 $api->version('v1',[
     'namespace' => 'App\Http\Controllers\Api'
 ],function($api){
@@ -25,6 +26,9 @@ $api->version('v1',[
         'expires' => config('api.rate_limits.sign.expires')
     ],function($api){
 
+        // 图片验证码
+        $api->post('captchas','CaptchasController@store')->name('api.captchas.store');
+
         // 短信验证码
         $api->post('verificationCodes','VerificationCodesController@store')
             ->name('api.verificationCodes.store');
@@ -32,6 +36,7 @@ $api->version('v1',[
         // 用户注册
         $api->post('users','UsersController@store')
             ->name('api.users.store');
+
     });
 });
 
@@ -47,6 +52,4 @@ $api->version('v2',function ($api) {
     });
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')->get('/user');

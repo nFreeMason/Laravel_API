@@ -68,3 +68,12 @@
 5、修改数据表迁移需要doctrine/dbal组件
 
 >安装：composer require doctrine/dbal
+
+5、gregwar/captcha 图片验证码
+
+    Larabbs 项目中已经安装了 mews/captcha，对于网页应用来说，这个组件使用起来十分方便，但是它依赖 session，而且没法获取和设置验证码文本，不适用于 API 的用例。在 API 的开发中，我们将选择使用 gregwar/captcha 来完成图片验证码的功能
+
+>安装：composer require gregwar/captcha
+>详情：[https://laravel-china.org/courses/laravel-advance-training-5.5/801/picture-verification-code](https://laravel-china.org/courses/laravel-advance-training-5.5/801/picture-verification-code)
+>github：[https://github.com/Gregwar/Captcha](https://github.com/Gregwar/Captcha)
+
