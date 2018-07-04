@@ -26,17 +26,7 @@ class CaptchasController extends Controller
             'code' => $captcha->getPhrase(),
             'cache' => cache(str_finish(config('app.url'),'/').$key)
         ];
-        $accessToken = '11_LzOCjoVQpGg_wDU6zKhm4Tsx6AOJx0uM7Mx7hmJ44mcDCJKEVy4kopQSLcYy31PEvgkJ_icmBnosXI5c7kyq4w';
-        $openID = 'o7rf11cthXcw4u1si';
-        $driver = Socialite::driver('weixin');
-        $driver->setOpenId($openID);
-        $oauthUser = $driver->userFromToken($accessToken);
 
-        $code = 'CODE';
-        $driver = Socialite::driver('weixin');
-        $response = $driver->getAccessTokenResponse($code);
-        $driver->setOpenId($response['openid']);
-        $oauthUser = $driver->userFromToken($response['access_token']);
         return $this->response->array($result)->setStatusCode(201);
     }
 }

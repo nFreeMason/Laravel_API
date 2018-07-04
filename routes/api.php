@@ -26,6 +26,19 @@ $api->version('v1',[
         'expires' => config('api.rate_limits.sign.expires')
     ],function($api){
 
+        // 删除 token
+        $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.destroy');
+
+        // 刷新 token
+        $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.update');
+
+        // 登录
+        $api->post('authorizations','AuthorizationsController@store')->name('api.authorizations.store');
+
+        // 第三方登录
+        $api->post('socials/{social_type}/authorizations','AuthorizationsController@socialStore')
+            ->name('api.socials.authorizations.store');
+
         // 图片验证码
         $api->post('captchas','CaptchasController@store')->name('api.captchas.store');
 

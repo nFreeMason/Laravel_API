@@ -82,4 +82,8 @@
     socialiteproviders 为 Laravel Socialite 提供了更多的第三方登录方式，基本上你需要的，都能在这里找到
 
 >安装：composer require socialiteproviders/weixin
->
+
+7、jwt_auth
+
+>安装：composer require tymon/jwt-auth:1.0.0-rc.2
+>详情：[https://laravel-china.org/courses/laravel-advance-training-5.5/793/mobile-login-api](https://laravel-china.org/courses/laravel-advance-training-5.5/793/mobile-login-api)
