@@ -87,3 +87,12 @@
 
 >安装：composer require tymon/jwt-auth:1.0.0-rc.2
 >详情：[https://laravel-china.org/courses/laravel-advance-training-5.5/793/mobile-login-api](https://laravel-china.org/courses/laravel-advance-training-5.5/793/mobile-login-api)
+
+8、Fractal 与 eloquent-resources 结构转换
+
+    响应数据的结构统一是十分重要的，我们需要保持统一。
+    考虑到前端同事们对接的方便程度，我们选择少一层嵌套的 ArraySerializer。这里有一个 中间件 可以方便的切换两中数据结构
+
+>安装：composer require liyu/dingo-serializer-switch
+>详情：[https://laravel-china.org/courses/larave l-advance-training-5.5/802/get-personal-information](https://laravel-china.org/courses/laravel-advance-training-5.5/802/get-personal-information)
+

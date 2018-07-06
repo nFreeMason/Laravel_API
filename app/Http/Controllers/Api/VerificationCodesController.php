@@ -12,7 +12,6 @@ class VerificationCodesController extends Controller
     //
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
-        dd(route('test.index'));
         $captchaData = cache($request->captcha_url);
 
         if ( ! $captchaData ) {

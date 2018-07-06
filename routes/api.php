@@ -17,7 +17,8 @@ $api = app(\Dingo\Api\Routing\Router::class);
 
 
 $api->version('v1',[
-    'namespace' => 'App\Http\Controllers\Api'
+    'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => 'serializer:array'
 ],function($api){
 
     $api->group([
@@ -52,6 +53,13 @@ $api->version('v1',[
 
         // 测试
         $api->any('test','Test@index');
+
+        // 需要 token 验证的接口
+        $api->group(['middleware'=>'api.auth'],function($api){
+            // 当前登录用户信息
+            $api->get('user','UsersController@me')
+                ->name('api.user.show');
+        });
 
     });
 });
