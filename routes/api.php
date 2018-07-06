@@ -50,6 +50,9 @@ $api->version('v1',[
         $api->post('users','UsersController@store')
             ->name('api.users.store');
 
+        // 测试
+        $api->any('test','Test@index');
+
     });
 });
 

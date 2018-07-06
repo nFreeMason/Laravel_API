@@ -152,7 +152,7 @@ return [
          */
         \Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         \App\Providers\EasySmsServiceProvider::class,
-
+        'Jenssegers\Agent\AgentServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -176,6 +176,8 @@ return [
     */
 
     'aliases' => [
+
+        'Jenssegers\Agent\AgentServiceProvider',
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
