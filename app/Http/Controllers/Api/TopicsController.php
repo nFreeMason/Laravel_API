@@ -11,7 +11,13 @@ use Illuminate\Http\Request;
 class TopicsController extends Controller
 {
 
-    public function destory(Topic $topic)
+    public function index(Request $request,Topic $topic)
+    {
+        $query = $topic->query();
+        dd($query);
+    }
+
+    public function destory(Topic $topic,Request $request)
     {
         $this->authorize('update',$topic);
         $topic->delete();
