@@ -96,3 +96,7 @@
 >安装：composer require liyu/dingo-serializer-switch
 >详情：[https://laravel-china.org/courses/larave l-advance-training-5.5/802/get-personal-information](https://laravel-china.org/courses/laravel-advance-training-5.5/802/get-personal-information)
 
+9、查询日志
+
+>安装：composer require overtrue/laravel-query-logger --dev
+>详情：[https://laravel-china.org/courses/laravel-advance-training-5.5/923/list-of-posts](https://laravel-china.org/courses/laravel-advance-training-5.5/923/list-of-posts)

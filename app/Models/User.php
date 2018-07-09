@@ -51,4 +51,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->id === $topic->user_id;
     }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
 }

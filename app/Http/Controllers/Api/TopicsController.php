@@ -11,10 +11,34 @@ use Illuminate\Http\Request;
 class TopicsController extends Controller
 {
 
+    public function userIndex(User $user, Request $request)
+    {
+        $topics = $user->topics()->recent()->paginate(20);
+        return $this->response->paginator($topics,new TopicTransformer());
+    }
+
     public function index(Request $request,Topic $topic)
     {
         $query = $topic->query();
-        dd($query);
+        if ( $categoryId = $request->category_id ) {
+            $query->where('category_id',$categoryId);
+        }
+
+        // 为了说明 N+1 问题，不使用 scopeWithOrder
+        switch ($request->order)
+        {
+            case 'recent':
+                $query->recent();
+                break;
+            default:
+                $query->recentReplied();
+                break;
+        }
+
+        $topics = $query->paginate(20);
+
+        return $this->response->paginator($topics,new TopicTransformer());
+
     }
 
     public function destory(Topic $topic,Request $request)

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Topic;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
@@ -50,5 +51,10 @@ class User extends Authenticatable implements JWTSubject
     public function isAuthorOf($topic)
     {
         return $this->id === $topic->user_id;
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
     }
 }
