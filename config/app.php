@@ -153,6 +153,7 @@ return [
         \Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         \App\Providers\EasySmsServiceProvider::class,
         'Jenssegers\Agent\AgentServiceProvider',
+        \Laravel\Scout\ScoutServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -54,11 +54,15 @@ $api->version('v1',[
         // 测试
         $api->any('test','Test@index');
 
+        // 分类列表
+        $api->get('categories','CategoriesController@index')
+            ->name('api.categories.index');
+
         // 需要 token 验证的接口
         $api->group(['middleware'=>'api.auth'],function($api){
 
             // 编辑登录用户信息
-            $api->patch('user','UsersController@update')
+            $api->patch('user/{user}','UsersController@update')
                 ->name('api.user.update');
 
             // 当前登录用户信息
