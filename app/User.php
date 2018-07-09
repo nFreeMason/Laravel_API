@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable,Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
+        'name', 'email', 'password','phone','introduction', 'avatar',
+        'weixin_openid', 'weixin_unionid'
     ];
 
     /**
@@ -38,5 +40,15 @@ class User extends Authenticatable implements JWTSubject
     {
         // TODO: Implement getJWTIdentifier() method.
         return $this->getKey();
+    }
+
+    public function searchableAs()
+    {
+        return 'users_index';
+    }
+
+    public function isAuthorOf($topic)
+    {
+        return $this->id === $topic->user_id;
     }
 }

@@ -15,8 +15,9 @@ class UsersController extends Controller
         return $this->response->item($this->user(), new UserTransformer());
     }
 
-    public function update(UserRequest $request)
+    public function update(UserRequest $request, User $user)
     {
+        dd($user);
         $user = $this->user();
         $attributes = $request->only(['name','email','introduction']);
         if ( $request->avatar_image_id ) {

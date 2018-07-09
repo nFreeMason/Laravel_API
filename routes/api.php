@@ -18,7 +18,7 @@ $api = app(\Dingo\Api\Routing\Router::class);
 
 $api->version('v1',[
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array'
+    'middleware' => ['serializer:array','bindings']
 ],function($api){
 
     $api->group([
@@ -62,7 +62,7 @@ $api->version('v1',[
         $api->group(['middleware'=>'api.auth'],function($api){
 
             // 编辑登录用户信息
-            $api->patch('user/{user}','UsersController@update')
+            $api->put('user/{user}','UsersController@update')
                 ->name('api.user.update');
 
             // 当前登录用户信息
@@ -76,6 +76,12 @@ $api->version('v1',[
             // 发布话题
             $api->post('topics','TopicsController@store')
                 ->name('api.topics.store');
+
+            // 修改话题
+            $api->patch('topics/{topic?}','TopicsController@update')
+                ->name('api.topics.update');
+
+
 
         });
 

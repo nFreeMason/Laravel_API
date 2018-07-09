@@ -46,4 +46,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return 'users_index';
     }
+
+    public function isAuthorOf($topic)
+    {
+        return $this->id === $topic->user_id;
+    }
 }
