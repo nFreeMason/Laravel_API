@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class TopicsController extends Controller
 {
 
+    public function destory(Topic $topic)
+    {
+        $this->authorize('update',$topic);
+        $topic->delete();
+        return $this->response->noContent();
+    }
+
     public function update(TopicRequest $request, Topic $topic)
     {
         $this->authorize('update', $topic);
