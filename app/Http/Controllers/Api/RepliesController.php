@@ -10,6 +10,20 @@ use Illuminate\Http\Request;
 
 class RepliesController extends Controller
 {
+
+    public function destory(Topic $topic, Reply $reply)
+    {
+        if ( $reply->topic_id != $topic->id ) {
+            return $this->response->errorBadRequest();
+        }
+
+        $this->authorize('destory',$reply);
+        $reply->delete();
+
+        return $this->response->noContent();
+
+    }
+
     //
     public function store(ReplyRequest $request, Topic $topic, Reply $reply)
     {
