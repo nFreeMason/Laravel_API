@@ -16,6 +16,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        //
+        \API::error(function(ModelNotFoundException $exception){
+            abort(404);
+        });
+
+        \API::error(function(AuthorizationException $exception){
+            abort(403,$exception->getMessage());
+        });
     }
 
     /**
@@ -25,13 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-        \API::error(function(ModelNotFoundException $exception){
-            abort(404);
-        });
 
-        \API::error(function(AuthorizationException $exception){
-            abort(403,$exception->getMessage());
-        });
     }
 }

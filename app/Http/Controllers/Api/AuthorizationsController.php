@@ -25,7 +25,7 @@ class AuthorizationsController extends Controller
     public function store(AuthorizationRequest $request)
     {
         $username = $request->username;
-
+        dd(\Auth::user());
         filter_var($username,FILTER_VALIDATE_EMAIL)
             ? $credentials['email'] = $username
             : $credentials['phone'] = $username;
