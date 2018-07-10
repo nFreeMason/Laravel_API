@@ -9,6 +9,48 @@ class ImageUploadHandler
     // 只允许以下后缀名的图片文件上传
     protected $allowed_ext = ["png", "jpg", "gif", 'jpeg'];
 
+    // 只允许以下后缀名的视频文件上传
+    protected $allowed_ext_video = ['mp4','wmv','rm','rmvb','3gp','mov','mp4','avi','flv'];
+
+    // 允许视频最大字节 15M
+    protected $video_max_byte = 15000000;
+
+    public function saveVideo($file)
+    {
+        if ( empty($file)  ) {
+            return false;
+        }
+
+        if ( $file->getSize() > $this->video_max_byte ) {
+            return false;
+        }
+
+        $extension = strtolower($file->getClientOriginalExtension()) ?: 'mp4';
+
+        if ( ! in_array($extension,$this->allowed_ext_video) ) {
+            return false;
+        }
+
+        //
+        $folder_name = 'app/' . date( 'Y/m/d', request()->server( 'REQUEST_TIME' ) );
+        // 生成日期目录
+        $path = public_path() . DIRECTORY_SEPARATOR . $folder_name;
+
+        if ( ! file_exists( $path ) ) {
+            // 创建目录
+            mkdir( $path, 0777, true );
+        }
+
+        $filename = 'video'.'_'.time().'.' . $extension;
+
+        // 将图片移动到我们的目标存储路径中
+        $file->move($path, $filename);
+
+        return [
+            'path' =>"/$folder_name/$filename"
+        ];
+    }
+
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
         // 构建存储的文件夹规则，值如：uploads/images/avatars/201709/21/

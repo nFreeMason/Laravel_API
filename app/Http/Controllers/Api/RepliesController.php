@@ -5,18 +5,30 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\ReplyRequest;
 use App\Models\Reply;
 use App\Models\Topic;
+use App\Models\User;
 use App\Transformers\ReplyTransformer;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
 {
 
+    public function userIndex(User $user)
+    {
+        $replies = $user->replies()->paginate();
+        return $this->response->paginator($replies,new ReplyTransformer());
+    }
+
+    public function index(Topic $topic)
+    {
+        $replies = $topic->replies()->paginate(5);
+        return $this->response->paginator($replies,new ReplyTransformer());
+    }
+
     public function destory(Topic $topic, Reply $reply)
     {
         if ( $reply->topic_id != $topic->id ) {
             return $this->response->errorBadRequest();
         }
-
         $this->authorize('destory',$reply);
         $reply->delete();
 

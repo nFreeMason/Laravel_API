@@ -6,8 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\User as baseUser;
 
-class User extends Authenticatable implements JWTSubject
+class User extends baseUser
 {
     use Notifiable,Searchable;
 
@@ -56,4 +57,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Topic::class);
     }
+
+
 }

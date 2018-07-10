@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Reply;
 use App\Models\Topic;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,5 +57,10 @@ class User extends Authenticatable implements JWTSubject
     public function topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }

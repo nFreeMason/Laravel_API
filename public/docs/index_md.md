@@ -100,3 +100,8 @@
 
 >安装：composer require overtrue/laravel-query-logger --dev
 >详情：[https://laravel-china.org/courses/laravel-advance-training-5.5/923/list-of-posts](https://laravel-china.org/courses/laravel-advance-training-5.5/923/list-of-posts)
+
+10、PHP 图片处理
+
+>安装：composer require intervention/image
+>github：[http://image.intervention.io/getting_started/installation](http://image.intervention.io/getting_started/installation)

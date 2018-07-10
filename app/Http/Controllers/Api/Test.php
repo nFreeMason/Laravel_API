@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Handlers\ImageUploadHandler;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Jenssegers\Agent\Facades\Agent;
 use Illuminate\Support\Facades\Auth;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Support\Facades\Storage;
 
 class Test extends Controller
 {
@@ -18,8 +20,10 @@ class Test extends Controller
     }
 
     //
-    public function index()
+    public function index(ImageUploadHandler $uploadHandler)
     {
+        dd(Storage::putFileAs('video', \request()->file('video'), 'video.mp4'));
+        dd($uploadHandler->saveVideo(\request()->file('video')));
         dd(User::search('In magnam consequuntur blanditiis amet minima dolores')->paginate());
         $client = ClientBuilder::create()->setHosts(["localhost:9200"])->build();
         $response = '';

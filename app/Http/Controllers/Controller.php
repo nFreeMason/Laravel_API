@@ -28,4 +28,8 @@ class Controller extends BaseController
 //            dd($result);
 //        }
 //    }
+    public function test()
+    {
+        return 'hello world';
+    }
 }

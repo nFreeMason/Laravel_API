@@ -154,6 +154,7 @@ return [
         \App\Providers\EasySmsServiceProvider::class,
         'Jenssegers\Agent\AgentServiceProvider',
         \Laravel\Scout\ScoutServiceProvider::class,
+        \Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -179,6 +180,7 @@ return [
     'aliases' => [
 
         'Jenssegers\Agent\AgentServiceProvider',
+        'Image' => \Intervention\Image\Facades\Image::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
