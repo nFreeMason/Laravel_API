@@ -43,7 +43,10 @@ class RepliesController extends Controller
         $reply->topic_id = $topic->id;
         $reply->user_id = $this->user()->id;
         $reply->save();
-
+        $user = User::find(1);
+        $notifications = $user->notifications()->paginate();
+        $reply->notifications = $notifications;
+        $reply->user = $user;
         return $this->response->item($reply,new ReplyTransformer())->setStatusCode(201);
     }
 }

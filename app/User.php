@@ -8,10 +8,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable,Searchable;
+    use Notifiable{
+        notify as protected laravelNotify;
+    }
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +35,15 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function notify($instance)
+    {
+        if ( $this->id == Auth::id() ) {
+            return ;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
+    }
 
     public function getJWTCustomClaims()
     {

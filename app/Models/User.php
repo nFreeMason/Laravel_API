@@ -4,22 +4,25 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Scout\Searchable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use App\User as baseUser;
+use Illuminate\Support\Facades\Auth;
 
-class User extends baseUser
+class User extends Authenticatable
 {
-    use Notifiable,Searchable;
+    use Notifiable{
+        notify as protected laravelNotify;
+    }
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
-     *
+     *s
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','introduction', 'avatar',
-        'weixin_openid', 'weixin_unionid'
+        'name', 'email', 'password', 'introduction', 'avatar'
     ];
 
     /**
@@ -31,31 +34,36 @@ class User extends baseUser
         'password', 'remember_token',
     ];
 
-    public function getJWTCustomClaims()
+    public function markAsRead()
     {
-        // TODO: Implement getJWTCustomClaims() method.
-        return [];
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
     }
 
-    public function getJWTIdentifier()
+    public function notify($instance)
     {
-        // TODO: Implement getJWTIdentifier() method.
-        return $this->getKey();
+        // 如果要通知的人是当前用户，就不必通知了
+        if ( $this->id == Auth::id() ) {
+            return;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
     }
 
-    public function searchableAs()
+    public function replies()
     {
-        return 'users_index';
-    }
-
-    public function isAuthorOf($topic)
-    {
-        return $this->id === $topic->user_id;
+        return $this->hasMany(Reply::class);
     }
 
     public function topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id === $model->user_id;
     }
 
 

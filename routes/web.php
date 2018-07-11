@@ -11,3 +11,5 @@
 |
 */
 Route::any('/','Controller@test');
+
+Route::get('topics/{topic}/{slug?}','TopicsController@show')->name('topics.show');

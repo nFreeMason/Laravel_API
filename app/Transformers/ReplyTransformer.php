@@ -13,9 +13,11 @@ class ReplyTransformer extends TransformerAbstract
     {
         return [
             'id' => $reply->id,
+            'user' => $reply->user ?? null,
             'user_id' => (int) $reply->user_id,
             'topic_id' => (int) $reply->topic_id,
             'content' => $reply->content,
+            'notifications' => $reply->notifications ?? null,
             'created_at' => $reply->created_at->toDateTimeString(),
             'updated_at' => $reply->updated_at->toDateTimeString(),
         ];
