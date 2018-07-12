@@ -52,7 +52,7 @@ $api->version('v1',[
             ->name('api.users.store');
 
         // 测试
-        $api->any('test','Test@index');
+        $api->any('test','Test@index')->middleware('auth.basic');
 
         // 分类列表
         $api->get('categories','CategoriesController@index')
@@ -77,6 +77,10 @@ $api->version('v1',[
         // 话题详情
         $api->get('topics/{topic}','TopicsController@show')
             ->name('api.topics.show');
+
+        // 资源推荐
+        $api->get('links','LinksController@index')
+            ->name('api.links.index');
 
         // 需要 token 验证的接口
         $api->group(['middleware'=>'api.auth'],function($api){
@@ -120,6 +124,10 @@ $api->version('v1',[
             // 通知统计
             $api->get('user/notifications/stats','NotificationsController@stats')
                 ->name('api.user.notifications.stats');
+
+            // 标记消息通知为已读
+            $api->patch('user/read/notifications','NotificationsController@read')
+                ->name('api.user.notifications.read');
 
         });
 

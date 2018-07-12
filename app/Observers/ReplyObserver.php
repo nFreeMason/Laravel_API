@@ -15,6 +15,10 @@ class ReplyObserver
     public function created(Reply $reply)
     {
         $topic = $reply->topic;
+        dump($topic);
+        $topic->title = 'test';
+        $topic->save();
+        dd($reply->topic);
         $reply->topic->increment('reply_count',1);
         // 广播
 //        broadcast(new RepliesEvent($reply));

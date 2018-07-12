@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class NotificationsController extends Controller
 {
 
+    public function read()
+    {
+        $this->user()->markAsRead();
+        return $this->response->noContent();
+    }
+
     public function stats()
     {
-        return $this->response->array([     
+        return $this->response->array([
             'unread_count' => $this->user()->notification_count,
         ]);
     }

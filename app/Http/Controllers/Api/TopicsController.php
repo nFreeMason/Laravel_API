@@ -67,7 +67,6 @@ class TopicsController extends Controller
         $topic->fill($request->all());
         $topic->user_id = $this->user()->id;
         $topic->save();
-
         return $this->response->item($topic,new TopicTransformer())->setStatusCode(201);
     }
 }

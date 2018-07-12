@@ -39,6 +39,9 @@ class RepliesController extends Controller
     //
     public function store(ReplyRequest $request, Topic $topic, Reply $reply)
     {
+        dd(app());
+        $self = new self;
+        $class = new \ReflectionClass($self);
         $reply->content = $request->content;
         $reply->topic_id = $topic->id;
         $reply->user_id = $this->user()->id;
@@ -50,3 +53,4 @@ class RepliesController extends Controller
         return $this->response->item($reply,new ReplyTransformer())->setStatusCode(201);
     }
 }
+
